@@ -12,11 +12,11 @@ import com.example.demo.repo.QuestionRepository;
 import com.example.demo.service.QuestionService;
 
 @Service
-public class QuestionServiceImpl implements QuestionService{
+public class QuestionServiceImpl implements QuestionService {
 
 	@Autowired
 	private QuestionRepository questionRepository;
-	
+
 	@Override
 	public Question addQuestion(Question question) {
 		return this.questionRepository.save(question);
@@ -40,6 +40,14 @@ public class QuestionServiceImpl implements QuestionService{
 	@Override
 	public Set<Question> getQuestionsOfQuiz(Quiz quiz) {
 		return this.questionRepository.findByQuiz(quiz);
+	}
+
+	@Override
+	public void deleteQuestion(Long quesId) {
+		Question question = new Question();
+		question.setQuesId(quesId);
+		this.questionRepository.delete(question);
+
 	}
 
 }
